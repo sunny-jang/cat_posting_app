@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "722059454704",
+    "firebase_url": "https://catbook-ff0ad.firebaseio.com",
+    "project_id": "catbook-ff0ad",
+    "storage_bucket": "catbook-ff0ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722059454704:android:143625ba0414494d787a35",
+        "android_client_info": {
+          "package_name": "com.example.catpostingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722059454704-fjqlvdbp7oi1ou75m3tl1ilan0eds0lk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-gslJXU23TZMQqTleOrMMDsLp5jLHhC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722059454704-fjqlvdbp7oi1ou75m3tl1ilan0eds0lk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
