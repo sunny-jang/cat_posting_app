@@ -40,10 +40,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     .sendPasswordResetEmail(email: _emailControllor.text);
 
                 final snackBar = SnackBar(
-                  content: Text("Chcck your email for pw reset"),
+                  content: Text("Check your email for pw reset"),
                 );
 
-                Scaffold.of(context).showSnackBar(snackBar);
+                Scaffold.of(_formKey.currentContext).showSnackBar(snackBar);
               },
               child: Text("Reset Password"),
             )
