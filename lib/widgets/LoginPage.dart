@@ -4,6 +4,7 @@ import 'package:catpostingapp/widgets/ForgetPassword.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -18,33 +19,39 @@ class LoginPage extends StatelessWidget {
         color: value.isJoin ? Colors.blueGrey[100] : Colors.grey[100],
         child: Column(
           children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 50, left: 24, right: 24),
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage("assets/login_cat.gif"),
-                  ),
+            SizedBox(
+              height: 40,
+            ),
+            SvgPicture.asset(
+              'assets/logo.svg',
+              width: 200,
+              color: Color(0xff549FDD),
+            ),
+            Container(
+              height: 200,
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage("assets/login_cat.gif"),
                 ),
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 10,
             ),
             Text(
               (value.isJoin ? "Welcome to Catbook!" : "Sign up now!"),
               style: TextStyle(
-                fontSize: 40,
+                fontSize: 30,
                 fontFamily: 'Amatic',
                 fontWeight: FontWeight.w700,
                 color: Colors.grey[800],
               ),
             ),
             Neumorphic(
-              margin: EdgeInsets.all(30),
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Padding(
-                padding: EdgeInsets.all(40),
+                padding: EdgeInsets.all(20),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -102,7 +109,7 @@ class LoginPage extends StatelessWidget {
             ),
             NeumorphicButton(
               margin: EdgeInsets.only(bottom: 10),
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
               child: Text(
                 value.isJoin ? "Sign in" : "Sign up",
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -124,7 +131,10 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder:(context)=> ForgetPassword() ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ForgetPassword()));
                 },
               ),
             ),
