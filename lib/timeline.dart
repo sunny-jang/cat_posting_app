@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -22,16 +23,41 @@ class Timeline extends StatelessWidget {
     return imageItems;
   }
 
-  Widget postItem () {
-    return Container(
-      color: Colors.red[200],
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(top: 10),
-      child: Column(
-        children: <Widget>[
-          ImageGridItem(1),
-          Text(""),
-        ],
+  Widget postItem() {
+    return Neumorphic(
+      margin: EdgeInsets.only(top: 30),
+      style: NeumorphicStyle(
+        shape: NeumorphicShape.concave,
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+        depth: 50,
+        lightSource: LightSource.topLeft,
+        color: Color(0xffe9eff5),
+      ),
+      child: Container(
+//        color: Colors.red[200],
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.only(top: 20),
+        child: Column(
+          children: <Widget>[
+            Neumorphic(
+              margin: EdgeInsets.only(bottom: 20),
+              style: NeumorphicStyle(
+                shape: NeumorphicShape.convex,
+                boxShape:
+                    NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+              ),
+              child: ImageGridItem(1),
+            ),
+            Text(
+              "My cuteass cat for this Catbook app  #극동이",
+              style: TextStyle(
+                fontFamily: 'Amatic',
+                fontWeight: FontWeight.w900,
+                fontSize: 28,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -40,19 +66,31 @@ class Timeline extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NeumorphicAppBar(
-        title: Text(
-          "CatBook",
-          style: TextStyle(
+        leading: NeumorphicButton(
+          child: Icon(Icons.camera_alt),
+          style: NeumorphicStyle(
+            depth: 5,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+          ),
+          onPressed: () {},
+        ),
+        title: Center(
+          child: Text(
+            "CatBook",
+            style: TextStyle(
               fontWeight: FontWeight.w900,
               fontFamily: 'Amatic',
-              letterSpacing: 5),
+              fontSize: 35,
+              letterSpacing: 5,
+            ),
+          ),
         ),
         actions: <Widget>[
           NeumorphicButton(
             child: Icon(Icons.account_circle),
             style: NeumorphicStyle(
-              depth: 3,
-              boxShape: NeumorphicBoxShape.circle(),
+              depth: 5,
+              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
             ),
             onPressed: () {},
           )
@@ -61,7 +99,7 @@ class Timeline extends StatelessWidget {
       body: Container(
         child: ListView(
           shrinkWrap: true,
-          padding: EdgeInsets.all(15.0),
+//          padding: EdgeInsets.all(15.0),
           children: <Widget>[
             Center(
               child: Column(
@@ -80,7 +118,6 @@ class Timeline extends StatelessWidget {
               ),
               onPressed: () {},
             ),
-
             NeumorphicButton(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
               child: Text(
@@ -101,10 +138,6 @@ class Timeline extends StatelessWidget {
     );
   }
 }
-
-
-
-
 
 class ImageGridItem extends StatefulWidget {
   int _index; // Get index when it's made by its class.
@@ -147,7 +180,8 @@ class _ImageGridItemState extends State<ImageGridItem> {
   }
 
   @override
-  void initState() { //  this code calls getImage function.
+  void initState() {
+    //  this code calls getImage function.
     super.initState();
     getImage();
   }
