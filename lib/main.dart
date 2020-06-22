@@ -12,14 +12,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
 //  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return NeumorphicApp(
       theme: NeumorphicThemeData(
-        baseColor: Color(0xFFffffff),
+//        baseColor: Color(0xFFffffff),
+        baseColor: Color(0xfff4f5f9),
+//        baseColor: Colors.blueGrey[100],
         lightSource: LightSource.topLeft,
         depth: 10,
       ),
@@ -33,23 +34,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<FirebaseUser>(
-      stream: FirebaseAuth.instance.onAuthStateChanged, // Whenever it's sign in or sign out or sign up
-      builder: (context, snapshot) {
-        print(snapshot.data);
-        if (snapshot.data == null) { //  If it's not login (When it's log out )
-          return ChangeNotifierProvider<JoinOrLogin>(
+        stream: FirebaseAuth.instance
+            .onAuthStateChanged, // Whenever it's sign in or sign out or sign up
+        builder: (context, snapshot) {
+          print(snapshot.data);
+          if (snapshot.data == null) {
+            //  If it's not login (When it's log out )
+            return ChangeNotifierProvider<JoinOrLogin>(
               create: (context) => JoinOrLogin(),
               child: LoginPage(), // Go to Loginpage
-          );
-        }else { // otherwise call Timeline widget
-          return Timeline(email: snapshot.data.email);
-        }
-      }
-    );
+            );
+          } else {
+            // otherwise call Timeline widget
+            return Timeline(email: snapshot.data.email);
+          }
+        });
   }
 }
