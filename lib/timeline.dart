@@ -62,6 +62,21 @@ class Timeline extends StatelessWidget {
               ),
               onPressed: () {},
             ),
+
+            NeumorphicButton(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+              child: Text(
+                "Sign out",
+                style: TextStyle(
+                  fontFamily: 'Amatic',
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 3,
+                ),
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+            ),
           ],
         ),
       ),
