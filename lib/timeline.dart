@@ -11,11 +11,29 @@ class Timeline extends StatelessWidget {
   final String email;
 
   List<Widget> makeImagesList() {
-    List<Widget> imageItems = [];
-    for (int i = 1; i <= 3; i++) {
-      imageItems.add(ImageGridItem(i));
-    }
+    List<Widget> imageItems = [
+      postItem(),
+      postItem(),
+      postItem(),
+      postItem(),
+      postItem(),
+    ];
+
     return imageItems;
+  }
+
+  Widget postItem () {
+    return Container(
+      color: Colors.red[200],
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.only(top: 10),
+      child: Column(
+        children: <Widget>[
+          ImageGridItem(1),
+          Text(""),
+        ],
+      ),
+    );
   }
 
   @override
@@ -84,6 +102,10 @@ class Timeline extends StatelessWidget {
   }
 }
 
+
+
+
+
 class ImageGridItem extends StatefulWidget {
   int _index; // Get index when it's made by its class.
 
@@ -107,7 +129,7 @@ class _ImageGridItemState extends State<ImageGridItem> {
     photoReference
         .child("kukdong${widget._index}.jpg")
         .getData(MAX_SIZE)
-        .then((data) { // after getting the data
+        .then((data) {
       this.setState(() {
         imageFile = data;
       });
