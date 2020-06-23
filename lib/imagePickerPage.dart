@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ImagePickerPage extends StatefulWidget {
+
   @override
   _ImagePickerPageState createState() => _ImagePickerPageState();
 }
 
 class _ImagePickerPageState extends State<ImagePickerPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _descriptionController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +21,25 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.grey[100],
+              color: Colors.grey[200],
               child: Image(
-                height: 300,
+                height: 200,
                 image: AssetImage('assets/placeholder-client.png'),
                 color: Colors.grey[500],
+              ),
+            ),
+            Container(
+              color: Colors.grey[300],
+              margin: EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
+              child: Form(
+                child: TextFormField(
+                  maxLines: 5,
+                  controller: _descriptionController,
+                  decoration: InputDecoration(
+                    hintText: "description"
+                  ),
+                ),
               ),
             ),
             SizedBox(
