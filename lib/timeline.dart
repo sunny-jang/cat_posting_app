@@ -178,7 +178,9 @@ class Timeline extends StatelessWidget {
                   style: NeumorphicStyle(
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
                 ),
               ],
             ),
