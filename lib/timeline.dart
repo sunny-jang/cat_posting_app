@@ -166,7 +166,11 @@ class Timeline extends StatelessWidget {
                   style: NeumorphicStyle(
                     color: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => ImagePickerPage(),
+                    ));
+                  },
                 ),
                 NeumorphicButton(
                   child: Icon(Icons.exit_to_app),
