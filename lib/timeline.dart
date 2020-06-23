@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Timeline extends StatelessWidget {
   Timeline({this.email});
@@ -39,7 +40,6 @@ class Timeline extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CircleAvatar(
-              backgroundImage: Imagea,
             ),
             Neumorphic(
               margin: EdgeInsets.only(bottom: 10),
@@ -80,15 +80,7 @@ class Timeline extends StatelessWidget {
           onPressed: () {},
         ),
         title: Center(
-          child: Text(
-            "CatBook",
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontFamily: 'Amatic',
-              fontSize: 35,
-              letterSpacing: 5,
-            ),
-          ),
+          child: SvgPicture.asset("assets/logo.svg", color: Colors.blue, height: 100)
         ),
         actions: <Widget>[
           NeumorphicButton(
