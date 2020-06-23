@@ -1,3 +1,4 @@
+//import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:catpostingapp/imagePickerPage.dart';
@@ -16,9 +17,6 @@ class Timeline extends StatelessWidget {
     List<Widget> imageItems = [
       postItem(),
       postItem(),
-      postItem(),
-      postItem(),
-      postItem(),
     ];
 
     return imageItems;
@@ -28,20 +26,23 @@ class Timeline extends StatelessWidget {
     return Neumorphic(
       margin: EdgeInsets.only(top: 30),
       style: NeumorphicStyle(
-        shape: NeumorphicShape.concave,
+        shape: NeumorphicShape.flat,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
-        depth: 50,
+        depth: -5,
         lightSource: LightSource.topLeft,
         color: Color(0xffe9eff5),
       ),
       child: Container(
-//        color: Colors.red[200],
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.only(top: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            CircleAvatar(
+              backgroundImage: Imagea,
+            ),
             Neumorphic(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: EdgeInsets.only(bottom: 10),
               style: NeumorphicStyle(
                 shape: NeumorphicShape.convex,
                 boxShape:
@@ -49,12 +50,15 @@ class Timeline extends StatelessWidget {
               ),
               child: ImageGridItem(1),
             ),
-            Text(
-              "My cuteass cat for this Catbook app  #극동이",
-              style: TextStyle(
-                fontFamily: 'Amatic',
-                fontWeight: FontWeight.w900,
-                fontSize: 28,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                "My cuteass cat for this Catbook app  #극동이",
+                style: TextStyle(
+//                fontFamily: 'Amatic',
+//                fontWeight: FontWeight.w900,
+                  fontSize: 16,
+                ),
               ),
             ),
           ],
@@ -88,7 +92,7 @@ class Timeline extends StatelessWidget {
         ),
         actions: <Widget>[
           NeumorphicButton(
-            child: Icon(Icons.account_circle),
+            child: Icon(Icons.flight_takeoff),
             style: NeumorphicStyle(
               depth: 5,
               boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
@@ -118,9 +122,11 @@ class Timeline extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => ImagePickerPage(),
-                ));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ImagePickerPage(),
+                    ));
               },
             ),
             NeumorphicButton(
@@ -138,6 +144,63 @@ class Timeline extends StatelessWidget {
               },
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Neumorphic(
+//        style: NeumorphicStyle(
+//          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+//        ),
+        child: BottomAppBar(
+          color: Color(0xfff4f5f9),
+          child: Container(
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                NeumorphicButton(
+                  child: Icon(Icons.home),
+                  padding: EdgeInsets.all(16),
+                  style: NeumorphicStyle(
+                    depth: 5,
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+                NeumorphicButton(
+                  child: Icon(Icons.add),
+                  padding: EdgeInsets.all(16),
+                  style: NeumorphicStyle(
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+                NeumorphicButton(
+                  child: Icon(Icons.exit_to_app),
+                  padding: EdgeInsets.all(16),
+                  style: NeumorphicStyle(
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+//        items: [
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.home),
+//            title: Text("Home"),
+//          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.add_circle),
+//            title: Text("New"),
+//          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.people),
+//            title: Text("Sign Out"),
+//          ),
+//        ],
         ),
       ),
     );
