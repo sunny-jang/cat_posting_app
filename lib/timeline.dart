@@ -40,6 +40,7 @@ class Timeline extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CircleAvatar(
+              backgroundImage: AssetImage('images/cat-avatar.jpg'),
             ),
             Neumorphic(
               margin: EdgeInsets.only(bottom: 10),
@@ -80,8 +81,8 @@ class Timeline extends StatelessWidget {
           onPressed: () {},
         ),
         title: Center(
-          child: SvgPicture.asset("assets/logo.svg", color: Colors.blue, height: 100)
-        ),
+            child: SvgPicture.asset("assets/logo.svg",
+                color: Colors.blue, height: 100)),
         actions: <Widget>[
           NeumorphicButton(
             child: Icon(Icons.flight_takeoff),
