@@ -1,4 +1,4 @@
-//import 'dart:html';
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -33,7 +33,6 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     setState(() {
       _image = file;
     });
-    print(_image);
   }
 
   @override
