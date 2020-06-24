@@ -110,38 +110,6 @@ class Timeline extends StatelessWidget {
                 children: makeImagesList(),
               ),
             ),
-            NeumorphicButton(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-              child: Text(
-                "Add image",
-                style: TextStyle(
-                  fontFamily: 'Amatic',
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 3,
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ImagePickerPage(),
-                    ));
-              },
-            ),
-            NeumorphicButton(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-              child: Text(
-                "Sign out",
-                style: TextStyle(
-                  fontFamily: 'Amatic',
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 3,
-                ),
-              ),
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-            ),
           ],
         ),
       ),
