@@ -163,20 +163,6 @@ class Timeline extends StatelessWidget {
               ],
             ),
           ),
-//        items: [
-//          BottomNavigationBarItem(
-//            icon: Icon(Icons.home),
-//            title: Text("Home"),
-//          ),
-//          BottomNavigationBarItem(
-//            icon: Icon(Icons.add_circle),
-//            title: Text("New"),
-//          ),
-//          BottomNavigationBarItem(
-//            icon: Icon(Icons.people),
-//            title: Text("Sign Out"),
-//          ),
-//        ],
         ),
       ),
     );
