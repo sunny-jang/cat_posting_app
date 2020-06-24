@@ -168,7 +168,7 @@ class LoginPage extends StatelessWidget {
       password: _passwordController
           .text, // we need to set a controller with TextFormField widget
     );
-    print(result.user);
+//    print(result.user);
     // send _emailController and _passwordController's text to Firebase and make an instance
 
     final FirebaseUser user =
@@ -182,7 +182,7 @@ class LoginPage extends StatelessWidget {
       Scaffold.of(context).showSnackBar(snackbar);
     }
 
-    print(user);
+//    print(user);
 
     Navigator.push(
         context,
