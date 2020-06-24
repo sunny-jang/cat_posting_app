@@ -34,7 +34,6 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     setState(() {
       _image = file;
     });
-    print(_image);
   }
 
   @override
