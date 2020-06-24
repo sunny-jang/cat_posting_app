@@ -14,7 +14,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
   final _picker = ImagePicker();
 
   void open_camera() {
-    PickedFile image =
+    PickedFile image;
   }
 
   @override
