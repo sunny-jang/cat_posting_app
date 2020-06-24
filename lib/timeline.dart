@@ -35,15 +35,21 @@ class Timeline extends StatelessWidget {
       ),
       child: Container(
         padding: EdgeInsets.all(10),
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            CircleAvatar(
-              backgroundImage: AssetImage('images/cat-avatar.jpg'),
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/cat-avatar2.jpg'),
+                  radius: 30,
+                ),
+//                Text('catlover'),
+              ],
             ),
             Neumorphic(
-              margin: EdgeInsets.only(bottom: 10),
+              margin: EdgeInsets.only(top: 15, bottom: 10),
               style: NeumorphicStyle(
                 shape: NeumorphicShape.convex,
                 boxShape:
