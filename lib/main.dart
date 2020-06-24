@@ -46,7 +46,7 @@ class Splash extends StatelessWidget {
             //  If it's not login (When it's log out )
             return ChangeNotifierProvider<JoinOrLogin>(
               create: (context) => JoinOrLogin(),
-              child: LoginPage(), // Go to Loginpage
+              child: LoginPage(snapshot.data), // Go to Loginpage
             );
           } else {
             // otherwise call Timeline widget

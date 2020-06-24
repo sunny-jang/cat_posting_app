@@ -12,6 +12,8 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  LoginPage(user);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<JoinOrLogin>(

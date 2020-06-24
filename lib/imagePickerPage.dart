@@ -1,7 +1,9 @@
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class ImagePickerPage extends StatefulWidget {
 
   @override
@@ -11,11 +13,27 @@ class ImagePickerPage extends StatefulWidget {
 class _ImagePickerPageState extends State<ImagePickerPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _descriptionController = TextEditingController();
+  var file = 'assets/placeholder-client.png';
+  var des = 'test';
+
+  final dbRef = FirebaseDatabase.instance.reference().child("posts");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: NeumorphicAppBar(
+        actions: [
+          NeumorphicButton(
+            child: Text('done'),
+            onPressed: (){
+              print(file);
+              dbRef.push().set({
+                "image_url" : file,
+                "description" : des,
+              });
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Column(
