@@ -45,7 +45,8 @@ class Timeline extends StatelessWidget {
                   backgroundImage: AssetImage('images/cat-avatar2.jpg'),
                   radius: 30,
                 ),
-//                Text('catlover'),
+                SizedBox(width: 10,),
+                Text('catlover', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[700]),),
               ],
             ),
             Neumorphic(
@@ -103,7 +104,6 @@ class Timeline extends StatelessWidget {
       body: Container(
         child: ListView(
           shrinkWrap: true,
-//          padding: EdgeInsets.all(15.0),
           children: <Widget>[
             Center(
               child: Column(
@@ -114,9 +114,6 @@ class Timeline extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Neumorphic(
-//        style: NeumorphicStyle(
-//          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
-//        ),
         child: BottomAppBar(
           color: Color(0xfff4f5f9),
           child: Container(
