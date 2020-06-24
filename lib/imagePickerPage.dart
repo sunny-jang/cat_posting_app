@@ -1,6 +1,5 @@
 //import 'dart:html';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:image_picker/image_picker.dart';
@@ -52,9 +51,15 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                       image: AssetImage('assets/placeholder-client.png'),
                       color: Colors.grey[500],
                     )
-                  : Image.file(
-                      _image,
-                      height: 200,
+                  : Neumorphic(
+                      style: NeumorphicStyle(
+                        shape: NeumorphicShape.convex,
+                        depth: 10,
+                      ),
+                      child: Image.file(
+                        _image,
+                        height: 300,
+                      ),
                     ),
             ),
             Container(
@@ -63,14 +68,14 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
               padding: EdgeInsets.all(20),
               child: Form(
                 child: TextFormField(
-                  maxLines: 5,
+                  maxLines: 3,
                   controller: _descriptionController,
                   decoration: InputDecoration(hintText: "Description"),
                 ),
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 60,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
