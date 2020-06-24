@@ -166,11 +166,7 @@ class Timeline extends StatelessWidget {
                   style: NeumorphicStyle(
                     color: Colors.white,
                   ),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => ImagePickerPage(),
-                    ));
-                  },
+                  onPressed: () {},
                 ),
                 NeumorphicButton(
                   child: Icon(Icons.exit_to_app),
@@ -178,9 +174,7 @@ class Timeline extends StatelessWidget {
                   style: NeumorphicStyle(
                     color: Colors.white,
                   ),
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),
