@@ -1,3 +1,6 @@
+//import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,11 +13,28 @@ class ImagePickerPage extends StatefulWidget {
 class _ImagePickerPageState extends State<ImagePickerPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _descriptionController = TextEditingController();
-
   final _picker = ImagePicker();
 
-  void open_camera() {
-    PickedFile image =
+  File _image;
+
+  void openCamera() async {
+    var selectedImage = await _picker.getImage(source: ImageSource.camera);
+    final File file = File(selectedImage.path);
+
+    setState(() {
+      _image = file;
+    });
+    print(_image);
+  }
+
+  void openGallery() async {
+    var selectedImage = await _picker.getImage(source: ImageSource.gallery);
+    final File file = File(selectedImage.path);
+
+    setState(() {
+      _image = file;
+    });
+    print(_image);
   }
 
   @override
@@ -26,11 +46,16 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
           children: <Widget>[
             Container(
               color: Colors.grey[200],
-              child: Image(
-                height: 200,
-                image: AssetImage('assets/placeholder-client.png'),
-                color: Colors.grey[500],
-              ),
+              child: _image == null
+                  ? Image(
+                      height: 200,
+                      image: AssetImage('assets/placeholder-client.png'),
+                      color: Colors.grey[500],
+                    )
+                  : Image.file(
+                      _image,
+                      height: 200,
+                    ),
             ),
             Container(
               color: Colors.grey[300],
@@ -56,7 +81,9 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  onPressed: () {},
+                  onPressed: () {
+                    openCamera();
+                  },
                   style:
                       NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
                 ),
@@ -69,7 +96,9 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                  onPressed: () {},
+                  onPressed: () {
+                    openGallery();
+                  },
                   style:
                       NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
                 ),
