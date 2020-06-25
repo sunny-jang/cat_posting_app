@@ -15,39 +15,48 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Forget password"),
+        title: Text("Forget password", style: TextStyle(color: Colors.grey[600]),),
+        backgroundColor: Colors.black,
+
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: _emailControllor,
-              decoration: InputDecoration(
-                icon: Icon(Icons.account_circle),
-                labelText: "Email",
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                controller: _emailControllor,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.account_circle),
+                  labelText: "Email",
+                ),
+                validator: (String value) {
+                  if (value.isEmpty) {
+                    return "Please input correct Email";
+                  }
+                  return null;
+                },
               ),
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return "Please input correct Email";
-                }
-                return null;
-              },
-            ),
-            FlatButton(
-              onPressed: () async {
-                await FirebaseAuth.instance
-                    .sendPasswordResetEmail(email: _emailControllor.text);
+              Container(
+                padding: EdgeInsets.all(30),
+                child: FlatButton(
+                  color: Colors.grey,
+                  onPressed: () async {
+                    await FirebaseAuth.instance
+                        .sendPasswordResetEmail(email: _emailControllor.text);
 
-                final snackBar = SnackBar(
-                  content: Text("Check your email for pw reset"),
-                );
+                    final snackBar = SnackBar(
+                      content: Text("Check your email for pw reset"),
+                    );
 
-                Scaffold.of(_formKey.currentContext).showSnackBar(snackBar);
-              },
-              child: Text("Reset Password"),
-            )
-          ],
+                    Scaffold.of(_formKey.currentContext).showSnackBar(snackBar);
+                  },
+                  child: Text("Reset Password"),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
