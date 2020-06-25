@@ -73,10 +73,9 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                 _uploadedFileURL = dowurl.toString();
               });
 
-
               if (_image != null && userInfo != null) {
                 dbRef.push().set({
-                  "uploadTime" : new DateTime.now().toString(),
+                  "uploadTime": new DateTime.now().toString(),
                   "userId": userInfo.uid,
                   "userEmail": userInfo.email,
                   "image": _uploadedFileURL,
@@ -161,7 +160,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                       NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
