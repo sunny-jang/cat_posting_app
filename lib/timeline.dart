@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:catpostingapp/imagePickerPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -12,68 +13,8 @@ import 'package:flutter_svg/svg.dart';
 class Timeline extends StatelessWidget {
   Timeline({this.email});
 
+  final dbRef = FirebaseDatabase.instance.reference().child("posts");
   final String email;
-
-  List<Widget> makeImagesList() {
-    List<Widget> imageItems = [
-      postItem(),
-      postItem(),
-    ];
-
-    return imageItems;
-  }
-
-  Widget postItem() {
-    return Neumorphic(
-      margin: EdgeInsets.only(top: 30),
-      style: NeumorphicStyle(
-        shape: NeumorphicShape.flat,
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
-        depth: -5,
-        lightSource: LightSource.topLeft,
-        color: Color(0xffe9eff5),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.only(top: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage('images/cat-avatar2.jpg'),
-                  radius: 30,
-                ),
-                SizedBox(width: 10,),
-                Text('catlover', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey[700]),),
-              ],
-            ),
-            Neumorphic(
-              margin: EdgeInsets.only(top: 15, bottom: 10),
-              style: NeumorphicStyle(
-                shape: NeumorphicShape.convex,
-                boxShape:
-                    NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
-              ),
-              child: ImageGridItem(1),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "My cuteass cat for this Catbook app  #극동이",
-                style: TextStyle(
-//                fontFamily: 'Amatic',
-//                fontWeight: FontWeight.w900,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,18 +42,84 @@ class Timeline extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            Center(
-              child: Column(
-                children: makeImagesList(),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: FutureBuilder(
+          future: dbRef.child("cat_list").orderByChild("uploadTime").startAt('1').once(),
+          builder: (context, AsyncSnapshot<DataSnapshot> snapshot) {
+            var lists = [];
+            if (snapshot.hasData) {
+              lists.clear();
+              Map<dynamic, dynamic> values = snapshot.data.value;
+              values.forEach((key, value) {
+                lists.add(value);
+              });
+            }
+            return ListView.builder(
+                shrinkWrap: true,
+                itemCount: lists.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Neumorphic(
+                    margin: EdgeInsets.only(top: 30),
+                    style: NeumorphicStyle(
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(30)),
+                      depth: -5,
+                      lightSource: LightSource.topLeft,
+                      color: Color(0xffe9eff5),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(top: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage:
+                                    AssetImage('images/cat-avatar2.jpg'),
+                                radius: 30,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                lists[index]["userEmail"].toString(),
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[700]),
+                              ),
+                            ],
+                          ),
+                          Neumorphic(
+                            margin: EdgeInsets.only(top: 15, bottom: 10),
+                            style: NeumorphicStyle(
+                              shape: NeumorphicShape.convex,
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.circular(30)),
+                            ),
+                            child:
+                                Image.network(lists[index]["image"].toString()),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                              lists[index]["des"].toString(),
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+          }),
       bottomNavigationBar: Neumorphic(
         child: BottomAppBar(
           color: Color(0xfff4f5f9),
@@ -167,12 +174,6 @@ class Timeline extends StatelessWidget {
 }
 
 class ImageGridItem extends StatefulWidget {
-  int _index; // Get index when it's made by its class.
-
-  ImageGridItem(int index) {
-    this._index = index; // we need it
-  }
-
   @override
   _ImageGridItemState createState() => _ImageGridItemState();
 }
@@ -181,20 +182,20 @@ class _ImageGridItemState extends State<ImageGridItem> {
   Uint8List imageFile; // Same as var imageFile
 
   StorageReference photoReference =
-      FirebaseStorage.instance.ref().child("Kukdong");
+      FirebaseStorage.instance.ref().child("cats");
 
   // FirebaseStorage.intance 생성 and ref its child "Kukdong"
-  getImage() {
-    int MAX_SIZE = 7 * 1024 * 1024; // we need Maxsize when we call "getData"
-    photoReference
-        .child("kukdong${widget._index}.jpg")
-        .getData(MAX_SIZE)
-        .then((data) {
-      this.setState(() {
-        imageFile = data;
-      });
-    }).catchError((error) {});
-  }
+//  getImage() {
+//    int MAX_SIZE = 7 * 1024 * 1024; // we need Maxsize when we call "getData"
+//    photoReference
+//        .child("kukdong${widget._index}.jpg")
+//        .getData(MAX_SIZE)
+//        .then((data) {
+//      this.setState(() {
+//        imageFile = data;
+//      });
+//    }).catchError((error) {});
+//  }
 
   Widget decideGridTileWidget() {
     if (imageFile == null) {
@@ -210,7 +211,7 @@ class _ImageGridItemState extends State<ImageGridItem> {
   void initState() {
     //  this code calls getImage function.
     super.initState();
-    getImage();
+//    getImage();
   }
 
   @override
