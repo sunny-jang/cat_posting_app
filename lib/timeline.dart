@@ -173,49 +173,5 @@ class Timeline extends StatelessWidget {
   }
 }
 
-class ImageGridItem extends StatefulWidget {
-  @override
-  _ImageGridItemState createState() => _ImageGridItemState();
-}
 
-class _ImageGridItemState extends State<ImageGridItem> {
-  Uint8List imageFile; // Same as var imageFile
 
-  StorageReference photoReference =
-      FirebaseStorage.instance.ref().child("cats");
-
-  // FirebaseStorage.intance 생성 and ref its child "Kukdong"
-//  getImage() {
-//    int MAX_SIZE = 7 * 1024 * 1024; // we need Maxsize when we call "getData"
-//    photoReference
-//        .child("kukdong${widget._index}.jpg")
-//        .getData(MAX_SIZE)
-//        .then((data) {
-//      this.setState(() {
-//        imageFile = data;
-//      });
-//    }).catchError((error) {});
-//  }
-
-  Widget decideGridTileWidget() {
-    if (imageFile == null) {
-      // if there is no image file in each Image item
-      return Center(child: Text("No Data"));
-    } else {
-      // if we got a image data
-      return Image.memory(imageFile, fit: BoxFit.cover);
-    }
-  }
-
-  @override
-  void initState() {
-    //  this code calls getImage function.
-    super.initState();
-//    getImage();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GridTile(child: decideGridTileWidget());
-  }
-}
