@@ -169,8 +169,6 @@ class Timeline extends StatelessWidget {
       bottomNavigationBar: Neumorphic(
         child: BottomAppBar(
           color: Color(0xffe9eff5),
-
-//          color: Color(0xfff4f5f9),
           child: Container(
             padding: EdgeInsets.only(top: 10, bottom: 10),
             child: Row(
