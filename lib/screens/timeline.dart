@@ -1,6 +1,7 @@
 
 
 import 'file:///G:/esunb/Github/catbook/cat_posting_app/lib/screens/imagePickerPage.dart';
+import 'package:catpostingapp/screens/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -213,6 +214,12 @@ class Timeline extends StatelessWidget {
                   ),
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                    );
                   },
                 ),
               ],

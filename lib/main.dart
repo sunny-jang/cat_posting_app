@@ -25,10 +25,7 @@ class MyApp extends StatelessWidget {
         depth: 10,
       ),
       home: Scaffold(
-        body: ChangeNotifierProvider<JoinOrLogin>(
-          create: (context) => JoinOrLogin(),
-          child: Splash(),
-        ),
+        body: Splash(),
       ),
     );
   }
