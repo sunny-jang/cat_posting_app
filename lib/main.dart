@@ -1,6 +1,6 @@
-import 'package:catpostingapp/JoinOrLogin.dart';
-import 'package:catpostingapp/timeline.dart';
-import 'package:catpostingapp/widgets/LoginPage.dart';
+import 'file:///G:/esunb/Github/catbook/cat_posting_app/lib/services/JoinOrLogin.dart';
+import 'file:///G:/esunb/Github/catbook/cat_posting_app/lib/screens/timeline.dart';
+import 'file:///G:/esunb/Github/catbook/cat_posting_app/lib/screens/LoginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

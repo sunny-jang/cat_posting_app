@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:catpostingapp/timeline.dart';
+import 'file:///G:/esunb/Github/catbook/cat_posting_app/lib/screens/timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
