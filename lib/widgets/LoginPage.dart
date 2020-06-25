@@ -182,7 +182,6 @@ class LoginPage extends StatelessWidget {
       Scaffold.of(context).showSnackBar(snackbar);
     }
 
-//    print(user);
 
     Navigator.push(
         context,
