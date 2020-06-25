@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:catpostingapp/timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
 
 class ImagePickerPage extends StatefulWidget {
   @override
@@ -16,10 +18,13 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _descriptionController = TextEditingController();
   final dbRef = FirebaseDatabase.instance.reference().child("posts/cat_list");
+  final stRef = FirebaseStorage.instance.ref();
+
   var userInfo;
   final _picker = ImagePicker();
-
+  var _uploadedFileURL;
   File _image;
+  var imageByte;
 
   void openCamera() async {
     var selectedImage = await _picker.getImage(source: ImageSource.camera);
@@ -37,6 +42,8 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
     setState(() {
       _image = file;
     });
+
+    print("image = $_image");
   }
 
   void getUserInfo() async {
@@ -56,18 +63,38 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
             child: Text("done"),
             onPressed: () async {
               await getUserInfo();
+              StorageUploadTask uploadTask = stRef
+                  .child("cats/${path.basename(_image.path)}")
+                  .putFile(_image);
 
-              dbRef.push().set({
-                "userId": userInfo.uid,
-                "userEmail": userInfo.email,
-                "image": _image,
-                "des": _descriptionController.text,
+              var dowurl =
+                  await (await uploadTask.onComplete).ref.getDownloadURL();
+              setState(() {
+                _uploadedFileURL = dowurl.toString();
               });
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Timeline(),
-                  ));
+
+
+              if (_image != null && userInfo != null) {
+                dbRef.push().set({
+                  "uploadTime" : new DateTime.now().toString(),
+                  "userId": userInfo.uid,
+                  "userEmail": userInfo.email,
+                  "image": _uploadedFileURL,
+                  "des": _descriptionController.text,
+                });
+
+                _descriptionController.clear();
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Timeline(),
+                    ));
+              } else {
+                final snackbar =
+                    SnackBar(content: Text("Please Pick an image."));
+                Scaffold.of(_formKey.currentContext).showSnackBar(snackbar);
+              }
             },
           ),
         ],
