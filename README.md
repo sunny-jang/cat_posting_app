@@ -1,5 +1,6 @@
 # Cat_posting_app
 Cat_posting_app for who love boasting their cats!
+- IOS, Andriod
 - Flutter, Dart
 
 
