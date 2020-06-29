@@ -1,5 +1,6 @@
-# cat_posting_app (Catbook)
-Catbook is a mobile app for those who love boasting their cats, available for both iOS and Android devices!
+# Catbook
+Catbook is a neumorphic designed mobile application for those who love boasting their cats on social media, available for both iOS and Android devices!
+
 
 ### Tech Stacks
 * Flutter
@@ -33,7 +34,7 @@ Catbook is a mobile app for those who love boasting their cats, available for bo
 
 
 ### 4. Timeline
-* List of posts
+* List of posts in chronological order from top to bottom.
 
 ![timeline1](https://user-images.githubusercontent.com/35230852/85854630-9788de80-b769-11ea-8468-5663bda59cba.png)
 ![timeline2](https://user-images.githubusercontent.com/35230852/85854653-a5d6fa80-b769-11ea-9c4c-41de29855bd9.png)
