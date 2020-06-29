@@ -1,5 +1,5 @@
 # cat_posting_app (Catbook)
-Catbook is a mobile app, both iOS and Android, for those who love boasting their cats!
+Catbook is a mobile app for those who love boasting their cats, available for both iOS and Android devices!
 
 ### Tech Stacks
 * Flutter
@@ -16,10 +16,12 @@ Catbook is a mobile app, both iOS and Android, for those who love boasting their
 ![signup](https://user-images.githubusercontent.com/35230852/85854550-72946b80-b769-11ea-9059-3bf4afe846b2.png)
 
 
+
 ### 2. Login
 * The user can log in with the email that he/she has created when signing up.
 
 ![login](https://user-images.githubusercontent.com/35230852/85854390-247f6800-b769-11ea-960d-d35aa2ab6123.png)
+
 
 
 ### 3. Forget Password
@@ -29,11 +31,13 @@ Catbook is a mobile app, both iOS and Android, for those who love boasting their
 ![forgetpassword](https://user-images.githubusercontent.com/35230852/85854602-893ac280-b769-11ea-9a79-e96e7362f0bc.png)
 
 
+
 ### 4. Timeline
 * List of posts
 
 ![timeline1](https://user-images.githubusercontent.com/35230852/85854630-9788de80-b769-11ea-8468-5663bda59cba.png)
 ![timeline2](https://user-images.githubusercontent.com/35230852/85854653-a5d6fa80-b769-11ea-9c4c-41de29855bd9.png)
+
 
 
 ### 5. Image Picker
