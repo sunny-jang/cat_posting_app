@@ -14,21 +14,23 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Consumer<JoinOrLogin>(
       builder: (context, value, child) => Container(
         color: value.isJoin ? Colors.blueGrey[100] : Colors.grey[100],
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 40,
+              height: size.height*0.1,
             ),
-            SvgPicture.asset(
-              'assets/logo.svg',
-              width: 200,
-              color: Color(0xff549FDD),
+            Image.asset(
+              'assets/logo.png',
+              width: size.height*0.3,
             ),
             Container(
-              height: 200,
+              height: size.height*0.3,
+              margin: EdgeInsets.symmetric(vertical: 10),
               child: FittedBox(
                 fit: BoxFit.cover,
                 child: CircleAvatar(
@@ -49,9 +51,9 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Neumorphic(
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              margin: EdgeInsets.symmetric(vertical: size.height*0.02, horizontal: 20),
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(size.height*0.03),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -108,8 +110,8 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             NeumorphicButton(
-              margin: EdgeInsets.only(bottom: 10),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              margin: EdgeInsets.only(bottom: size.height*0.02),
+              padding: EdgeInsets.symmetric(vertical: size.height*0.02, horizontal: 40),
               child: Text(
                 value.isJoin ? "Sign in" : "Sign up",
                 style: TextStyle(fontWeight: FontWeight.bold),
