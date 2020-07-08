@@ -29,8 +29,8 @@ class Timeline extends StatelessWidget {
           onPressed: () {},
         ),
         title: Center(
-            child: SvgPicture.asset("assets/logo.svg",
-                color: Colors.blue, height: 100)),
+            child: Image.asset("assets/logo.png", width: 150,),
+        ),
         actions: <Widget>[
           NeumorphicButton(
             child: Icon(Icons.flight_takeoff, color: Colors.grey[700]),
@@ -139,8 +139,7 @@ class Timeline extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 10),
                           child: Text(
-                            lists[index]["des"].toString() +
-                                " Hello, I'm Ralph who is super duper cute. Thanks.",
+                            lists[index]["des"].toString(),
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.grey[700],
