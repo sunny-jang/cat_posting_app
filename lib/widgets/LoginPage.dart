@@ -19,20 +19,22 @@ class LoginPage extends StatelessWidget {
     return Consumer<JoinOrLogin>(
       builder: (context, value, child) => Container(
         color: value.isJoin ? Colors.blueGrey[100] : Colors.grey[100],
-        child: Column(
+        child: ListView(
           children: <Widget>[
             SizedBox(
-              height: size.height*0.1,
+              height: size.height * 0.1,
             ),
             Image.asset(
               'assets/logo.png',
-              width: size.height*0.3,
+              width: size.height * 0.3,
+              height: size.height * 0.05,
             ),
             Container(
-              height: size.height*0.3,
+              height: size.height * 0.3,
+              width: size.height * 0.3,
               margin: EdgeInsets.symmetric(vertical: 10),
               child: FittedBox(
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 child: CircleAvatar(
                   backgroundImage: AssetImage("assets/login_cat.gif"),
                 ),
@@ -41,19 +43,22 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text(
-              (value.isJoin ? "Welcome to Catbook!" : "Sign up now!"),
-              style: TextStyle(
-                fontSize: 30,
-                fontFamily: 'Amatic',
-                fontWeight: FontWeight.w700,
-                color: Colors.grey[800],
+            Center(
+              child: Text(
+                (value.isJoin ? "Welcome to Catbook!" : "Sign up now!"),
+                style: TextStyle(
+                  fontSize: 30,
+                  fontFamily: 'Amatic',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.grey[800],
+                ),
               ),
             ),
             Neumorphic(
-              margin: EdgeInsets.symmetric(vertical: size.height*0.02, horizontal: 20),
+              margin: EdgeInsets.symmetric(
+                  vertical: size.height * 0.02, horizontal: 20),
               child: Padding(
-                padding: EdgeInsets.all(size.height*0.03),
+                padding: EdgeInsets.all(size.height * 0.03),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -109,50 +114,55 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            NeumorphicButton(
-              margin: EdgeInsets.only(bottom: size.height*0.02),
-              padding: EdgeInsets.symmetric(vertical: size.height*0.02, horizontal: 40),
-              child: Text(
-                value.isJoin ? "Sign in" : "Sign up",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  value.isJoin ? _login(context) : _register(context);
-                  print(_emailController.text.toString());
-                  print(_passwordController.text.toString());
-                }
-                ;
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: GestureDetector(
-                child: Text(
-                  value.isJoin ? 'Forgot password?' : '',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+            Column(
+              children: [
+                NeumorphicButton(
+                  margin: EdgeInsets.only(bottom: size.height * 0.02),
+                  padding: EdgeInsets.symmetric(
+                      vertical: size.height * 0.02, horizontal: 40),
+                  child: Text(
+                    value.isJoin ? "Sign in" : "Sign up",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      value.isJoin ? _login(context) : _register(context);
+                      print(_emailController.text.toString());
+                      print(_passwordController.text.toString());
+                    }
+                    ;
+                  },
                 ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ForgetPassword()));
-                },
-              ),
-            ),
-            GestureDetector(
-              child: Text(
-                value.isJoin
-                    ? 'Dont have an account?'
-                    : 'Do you already have an accout?',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              onTap: () {
-                value.toggle();
-              },
-            ),
-            SizedBox(
-              height: 20,
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: GestureDetector(
+                    child: Text(
+                      value.isJoin ? 'Forgot password?' : '',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgetPassword()));
+                    },
+                  ),
+                ),
+                GestureDetector(
+                  child: Text(
+                    value.isJoin
+                        ? 'Dont have an account?'
+                        : 'Do you already have an accout?',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {
+                    value.toggle();
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                )
+              ],
             )
           ],
         ),
@@ -183,7 +193,6 @@ class LoginPage extends StatelessWidget {
           content: Text("Please try again lager.")); // Making a snackbar
       Scaffold.of(context).showSnackBar(snackbar);
     }
-
 
     Navigator.push(
         context,
