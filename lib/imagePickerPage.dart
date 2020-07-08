@@ -60,7 +60,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
         actions: [
           NeumorphicButton(
             padding: EdgeInsets.all(12),
-            child: Text("done"),
+            child: Center(child: Text("done")),
             onPressed: () async {
               await getUserInfo();
               StorageUploadTask uploadTask = stRef
