@@ -171,7 +171,6 @@ class LoginPage extends StatelessWidget {
   }
 
   void _register(BuildContext context) async {
-    print("register!!!");
     final AuthResult result =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       //  Create a new user with giving email and password
@@ -180,7 +179,6 @@ class LoginPage extends StatelessWidget {
       password: _passwordController
           .text, // we need to set a controller with TextFormField widget
     );
-//    print(result.user);
     // send _emailController and _passwordController's text to Firebase and make an instance
 
     final FirebaseUser user =
@@ -188,7 +186,6 @@ class LoginPage extends StatelessWidget {
 
     if (user == null) {
       // if it didn't work, fulfil this code
-      print('fail $user');
       final snackbar = SnackBar(
           content: Text("Please try again lager.")); // Making a snackbar
       Scaffold.of(context).showSnackBar(snackbar);
@@ -203,7 +200,6 @@ class LoginPage extends StatelessWidget {
 
   void _login(BuildContext context) async {
     // Almost same code with _register()
-    print("login!!!");
     final AuthResult result =
         await FirebaseAuth.instance.signInWithEmailAndPassword(
       // Request Sign in with the giving email and password
