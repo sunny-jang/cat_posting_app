@@ -59,16 +59,13 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
       appBar: NeumorphicAppBar(
         actions: [
           NeumorphicButton(
-            padding: EdgeInsets.all(12),
-            child: Center(child: Text("done")),
+            padding: EdgeInsets.all(10),
+            child: Center(child: Text("Share")),
             onPressed: () async {
               await getUserInfo();
-              StorageUploadTask uploadTask = stRef
-                  .child("cats/${path.basename(_image.path)}")
-                  .putFile(_image);
+              StorageUploadTask uploadTask = stRef.child("cats/${path.basename(_image.path)}").putFile(_image);
 
-              var dowurl =
-                  await (await uploadTask.onComplete).ref.getDownloadURL();
+              var dowurl = await (await uploadTask.onComplete).ref.getDownloadURL();
               setState(() {
                 _uploadedFileURL = dowurl.toString();
               });
@@ -90,8 +87,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                       builder: (context) => Timeline(),
                     ));
               } else {
-                final snackbar =
-                    SnackBar(content: Text("Please Pick an image."));
+                final snackbar = SnackBar(content: Text("Please Pick an image."));
                 Scaffold.of(_formKey.currentContext).showSnackBar(snackbar);
               }
             },
@@ -122,7 +118,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                 child: TextFormField(
                   maxLines: 5,
                   controller: _descriptionController,
-                  decoration: InputDecoration(hintText: "Description"),
+                  decoration: InputDecoration(hintText: "Caption"),
                 ),
               ),
             ),
@@ -141,8 +137,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                   onPressed: () {
                     openCamera();
                   },
-                  style:
-                      NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
+                  style: NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
                 ),
                 SizedBox(
                   width: 20,
@@ -156,8 +151,7 @@ class _ImagePickerPageState extends State<ImagePickerPage> {
                   onPressed: () {
                     openGallery();
                   },
-                  style:
-                      NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
+                  style: NeumorphicStyle(depth: 9, shape: NeumorphicShape.concave),
                 ),
               ],
             ),
