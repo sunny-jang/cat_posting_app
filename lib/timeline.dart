@@ -4,7 +4,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_svg/svg.dart';
 
 class Timeline extends StatelessWidget {
   Timeline({this.email});
@@ -60,7 +59,6 @@ class Timeline extends StatelessWidget {
               });
             }
             return ListView.builder(
-//                padding: EdgeInsets.all(15),
               shrinkWrap: true,
               itemCount: lists.length,
               itemBuilder: (BuildContext context, int index) {
