@@ -55,8 +55,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Neumorphic(
-              margin: EdgeInsets.symmetric(
-                  vertical: size.height * 0.02, horizontal: 20),
+              margin: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: 20),
               child: Padding(
                 padding: EdgeInsets.all(size.height * 0.03),
                 child: Form(
@@ -66,19 +65,17 @@ class LoginPage extends StatelessWidget {
                       Neumorphic(
                         padding: EdgeInsets.only(left: 15),
                         style: NeumorphicStyle(
-                            depth: -2,
-                            boxShape: NeumorphicBoxShape.roundRect(
-                                BorderRadius.circular(20))),
+                            depth: -2, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20))),
                         child: TextFormField(
                           controller: _emailController,
                           decoration: InputDecoration(
-                            labelText: "catstagram.google.com",
+                            labelText: "catbook@email.com",
                             icon: Icon(Icons.account_circle),
                             enabledBorder: InputBorder.none,
                           ),
                           validator: (String value) {
                             if (value.isEmpty) {
-                              return "Please input correct Email";
+                              return "Please type in correct email";
                             }
                             return null;
                           },
@@ -90,20 +87,18 @@ class LoginPage extends StatelessWidget {
                       Neumorphic(
                         padding: EdgeInsets.only(left: 15),
                         style: NeumorphicStyle(
-                            depth: -2,
-                            boxShape: NeumorphicBoxShape.roundRect(
-                                BorderRadius.circular(20))),
+                            depth: -2, boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20))),
                         child: TextFormField(
                           controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
-                            labelText: "password",
+                            labelText: "Password",
                             enabledBorder: InputBorder.none,
                             icon: Icon(Icons.security),
                           ),
                           validator: (String value) {
                             if (value.isEmpty) {
-                              return "Please  input correct Password";
+                              return "Please input correct password";
                             }
                             return null;
                           },
@@ -118,8 +113,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 NeumorphicButton(
                   margin: EdgeInsets.only(bottom: size.height * 0.02),
-                  padding: EdgeInsets.symmetric(
-                      vertical: size.height * 0.02, horizontal: 40),
+                  padding: EdgeInsets.symmetric(vertical: size.height * 0.02, horizontal: 40),
                   child: Text(
                     value.isJoin ? "Sign in" : "Sign up",
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -137,22 +131,17 @@ class LoginPage extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 10),
                   child: GestureDetector(
                     child: Text(
-                      value.isJoin ? 'Forgot password?' : '',
+                      value.isJoin ? 'Forgot your password?' : '',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ForgetPassword()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword()));
                     },
                   ),
                 ),
                 GestureDetector(
                   child: Text(
-                    value.isJoin
-                        ? 'Dont have an account?'
-                        : 'Do you already have an accout?',
+                    value.isJoin ? 'Don\'t have an account?' : 'Already have an account?',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   onTap: () {
@@ -171,23 +160,19 @@ class LoginPage extends StatelessWidget {
   }
 
   void _register(BuildContext context) async {
-    final AuthResult result =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    final AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       //  Create a new user with giving email and password
       email: _emailController.text,
       // we need to set a controller with TextFormField widget
-      password: _passwordController
-          .text, // we need to set a controller with TextFormField widget
+      password: _passwordController.text, // we need to set a controller with TextFormField widget
     );
     // send _emailController and _passwordController's text to Firebase and make an instance
 
-    final FirebaseUser user =
-        result.user; // after making a new user, save it as user
+    final FirebaseUser user = result.user; // after making a new user, save it as user
 
     if (user == null) {
       // if it didn't work, fulfil this code
-      final snackbar = SnackBar(
-          content: Text("Please try again lager.")); // Making a snackbar
+      final snackbar = SnackBar(content: Text("Please try again later.")); // Making a snackbar
       Scaffold.of(context).showSnackBar(snackbar);
     }
 
@@ -200,8 +185,7 @@ class LoginPage extends StatelessWidget {
 
   void _login(BuildContext context) async {
     // Almost same code with _register()
-    final AuthResult result =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+    final AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(
       // Request Sign in with the giving email and password
       email: _emailController.text,
       password: _passwordController.text,
@@ -211,11 +195,10 @@ class LoginPage extends StatelessWidget {
     final FirebaseUser user = result.user;
 
     if (user == null) {
-      final snackbar = SnackBar(content: Text("Please try again lager."));
+      final snackbar = SnackBar(content: Text("Please try again later."));
       Scaffold.of(context).showSnackBar(snackbar);
     }
 
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => Timeline(email: user.email)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Timeline(email: user.email)));
   }
 }
